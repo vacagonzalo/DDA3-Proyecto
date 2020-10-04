@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: DataTypes.DATE
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Reading',
   });
   return Reading;

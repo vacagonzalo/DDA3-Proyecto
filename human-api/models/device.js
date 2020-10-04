@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Device extends Model {
     static associate(models) {
-      Device.hasMany(models.Reading);
+      //Device.hasMany(models.Reading);
     }
   };
   Device.init({

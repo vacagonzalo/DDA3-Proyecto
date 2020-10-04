@@ -11,6 +11,9 @@ app.use(bodyParser.json());
 const devices = require('./routes/devices.js');
 app.use('/devices', devices);
 
+const readings = require('./routes/readings.js');
+app.use('/readings', readings);
+
 app.listen(PORT, () => {
-    console.log(`human-api on port ${PORT}`)
+    console.log(`human-api on port ${PORT}`);
 });
