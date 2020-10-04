@@ -18,12 +18,37 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const device = await models.Device.build({ name: req.body.name });
-    device.save();
-    res.sendStatus(201);
+    device.save()
+      .then(() => {
+        res.sendStatus(201);
+        return;
+      })
+      .catch(async (err) => {
+        if (err.errors[0].type == "unique violation") {
+          const oldDevice = await models.Device.findOne({ where: { name: req.body.name }, paranoid: false });
+          if (oldDevice.deletedAt == null) {
+            res.status(403).send('duplicate');
+          } else {
+            await oldDevice.restore()
+              .then(() => {
+                res.sendStatus(201);
+                return;
+              })
+              .catch((err) => {
+                res.status(409).send(err);
+                return;
+              })
+          }
+        } else {
+          res.status(409).send(err);
+        }
+        return;
+      })
   }
   catch (error) {
     console.log(error)
     res.sendStatus(500);
+    return;
   }
 });
 
@@ -31,10 +56,25 @@ router.post('/', async (req, res) => {
 router.put('/', async (req, res) => {
   try {
     const oldDevice = await models.Device.findOne({ where: { id: req.body.id } });
-    oldDevice.name = req.body.name;
-    oldDevice.updatedAt = new Date();
-    await oldDevice.save();
-    res.sendStatus(200);
+    if (oldDevice instanceof models.Device) {
+      oldDevice.name = req.body.name;
+      oldDevice.updatedAt = new Date();
+      await oldDevice.save()
+        .then(() => {
+          res.sendStatus(200);
+          return;
+        })
+        .catch((err) => {
+          if (err.errors[0].type == "unique violation") {
+            res.status(403).send('duplicate');
+          } else {
+            res.status(409).send(err);
+          }
+          return;
+        })
+    } else {
+      res.sendStatus(404);
+    }
   }
   catch (error) {
     console.log(error);
@@ -46,10 +86,21 @@ router.put('/', async (req, res) => {
 router.delete('/', async (req, res) => {
   try {
     const device = await models.Device.findOne({ where: { id: req.body.id } });
-    await device.destroy();
-    res.sendStatus(200);
+    if (device instanceof models.Device) {
+      await device.destroy()
+        .then(() => {
+          res.sendStatus(200);
+          return;
+        })
+        .catch((err) => {
+          res.sendStatus(409);
+          return;
+        })
+    } else {
+      res.sendStatus(404);
+    }
   }
-  catch(error) {
+  catch (error) {
     res.sendStatus(500);
   }
 })
