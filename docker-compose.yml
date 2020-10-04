@@ -35,3 +35,18 @@ services:
             - database
         networks: 
             - iot
+
+    mqtt-broker:
+        image: eclipse-mosquitto
+        container_name: broker
+        hostname: broker
+        restart: always
+        volumes: 
+            - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+        expose: 
+            - '1883'
+            - '9001'
+        ports: 
+            - '1883'
+        networks: 
+            - iot
