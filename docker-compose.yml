@@ -20,3 +20,18 @@ services:
             - '5432:5432'
         networks: 
             - iot
+
+    human-api:
+        image: vaca/human-api
+        container_name: human-api
+        hostname: human-api
+        restart: always
+        expose:
+            - '5432'
+            - '9999'
+        ports:
+            - '9999:9999'
+        depends_on: 
+            - database
+        networks: 
+            - iot
