@@ -6,6 +6,8 @@ docker build -t vaca/human-api ./human-api/
 
 docker build -t vaca/device-api ./device-api/
 
+docker build -t vaca/virtual-device ./virtual-device/
+
 docker-compose up -d
 
 docker-compose exec human-api sh -c "npx sequelize-cli db:migrate"

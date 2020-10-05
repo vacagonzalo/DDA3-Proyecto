@@ -1,0 +1,19 @@
+{
+  "name": "virtual-device",
+  "version": "1.0.0",
+  "description": "simulacion de dispositivos iot en campo, con el fin de generar una mejor demostracion para la catedra",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install",
+    "dev": "nodemon index.js",
+    "production": "node index.js"
+  },
+  "author": "Gonzalo Nahuel Vaca",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^4.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
