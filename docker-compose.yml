@@ -65,3 +65,16 @@ services:
             - mqtt-broker
         networks: 
             - iot
+
+    virtual-device:
+        image: vaca/virtual-device
+        container_name: virtual-device
+        hostname: virtual-device
+        restart: always
+        expose: 
+            - '1883'
+            - '9001'
+        depends_on: 
+            - mqtt-broker
+        networks: 
+            - iot
