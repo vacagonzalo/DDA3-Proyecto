@@ -42,11 +42,26 @@ services:
         hostname: broker
         restart: always
         volumes: 
-            - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+            - ./mqtt-broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
         expose: 
             - '1883'
             - '9001'
         ports: 
+            - '1883:1883'
+        networks: 
+            - iot
+
+    device-api:
+        image: vaca/device-api
+        container_name: device-api
+        hostname: device-api
+        restart: always
+        expose: 
             - '1883'
+            - '5432'
+            - '9001'
+        depends_on: 
+            - database
+            - mqtt-broker
         networks: 
             - iot

@@ -1,0 +1,23 @@
+{
+  "name": "device-api",
+  "version": "1.0.0",
+  "description": "api para que los dispositivos se comuniquen con la base de datos",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install",
+    "dev": "nodemon index.js",
+    "production": "node index.js"
+  },
+  "author": "Gonzalo Nahuel Vaca",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^4.2.1",
+    "pg": "^8.4.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
+}

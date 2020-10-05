@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const from = req.body.from;
     const to = req.body.to;
     if (to == "" && from == "") {
-      const readings = await models.Reading.findAll({ where: { deviceId: id } });
+      const readings = await models.Reading.findAll();
       res.status(200).send(readings);
     } else if (to == "") {
       const fromDate = new Date(from);
