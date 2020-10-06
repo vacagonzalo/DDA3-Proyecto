@@ -21,24 +21,30 @@ client.on('message', (topic, message) => {
   }
 });
 
+var names = ['alfa', 'bravo', 'charlie', 'delta'];
 var actuators = [false, false, false, false];
 
-// {id:2, a:true}
+// {n:'alfa', a:true}
 function changeActuator(data) {
-  actuators[data.id - 2] = data.a;
+  let index = names.findIndex((element) => {
+    return element == data.n;
+  });
+  if(!!index) {
+    actuators[index] = data.a;
+  }
 }
 
+// '{"n":"alfa","t":24.2,"h":77.7,"a":true}'
 const delay = 10000;
-
 setInterval(() => {
-  let id = randomInt(2, 5);
+  let index = randomInt(0, 3);
+  let n = names[index];
   let t = randomFloat(22, 26);
   let h = randomFloat(60, 75);
-  let a = actuators[id - 2];
-  let data = `{"id":${id},"t":${t},"h":${h},"a":${a}}`;
+  let a = actuators[index];
+  let data = `{"n":"${n}","t":${t},"h":${h},"a":${a}}`;
   console.log(data);
   client.publish('readings', data);
-
 }, delay);
 
 function randomInt(min, max) {
