@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 // {from: "2020-10-01", to: "2020-10-25"} || {from: "", to: ""}
-router.get('/', async (req, res) => {
+router.get('/date', async (req, res) => {
   try {
     const from = req.body.from;
     const to = req.body.to;
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 });
 
 // {from: "2020-10-01", to: "2020-10-25"} || {from: "", to: ""}
-router.get('/:id', async (req, res) => {
+router.get('/date/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const from = req.body.from;
@@ -92,6 +92,38 @@ router.get('/:id', async (req, res) => {
   catch (error) {
     console.log(error);
     res.sendStatus(500);
+  }
+});
+
+// null
+router.get('/last/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const readings = await models.Reading.findOne({
+       where: {deviceId: id},
+       order: [['id', 'DESC']]
+      });
+    res.status(200).send(readings);
+  }
+  catch (error) {
+    res.status(201).send(error);
+  }
+});
+
+// {limit: 10}
+router.get('/limit/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const amount = req.body.limit;
+    const readings = await models.Reading.findAll({
+       where: {deviceId: id},
+       order: [['id', 'DESC']],
+       limit: amount
+      });
+    res.status(200).send(readings);
+  }
+  catch (error) {
+    res.status(201).send(error);
   }
 });
 

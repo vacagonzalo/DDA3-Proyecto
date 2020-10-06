@@ -27,13 +27,13 @@ client.on("error", (error) => {
   console.log(`connection error: ${error}`);
 });
 
-// {"id":2,"t":24.3,"h":67.8,"a":true}
+// {"n":"alfa","t":24.3,"h":67.8,"a":true}
 async function newReading(data) {
   try {
-    const device = await models.Device.findOne({ where: { id: data.id } });
+    const device = await models.Device.findOne({ where: { name: data.n } });
     if (device instanceof models.Device) {
       const reading = models.Reading.build({
-        deviceId: data.id,
+        deviceId: device.id,
         temperature: data.t,
         humidity: data.h,
         actuator: data.a,
