@@ -5,8 +5,8 @@
 #include <PubSubClient.h> // PubSubClient by Nick O'Leary
                           // https://github.com/knolleary/pubsubclient
 
-#include <ArduinoJson.h>  // ArduinoJson by  Benoit Blanchon
-                          // https://github.com/bblanchon/ArduinoJson
+#include <ArduinoJson.h> // ArduinoJson by Benoit Blanchon
+                         // https://github.com/bblanchon/ArduinoJson
 
 #define LED 2
 #define TIME 1000
@@ -32,6 +32,8 @@ const char *S_TOPIC = "orders";
 
 bool actuator = true;
 
+StaticJsonDocument<256> doc;
+
 WiFiClient MQTTclient;
 PubSubClient client(MQTTclient);
 
@@ -42,7 +44,21 @@ void callback(char *topic, byte *payload, unsigned int length)
   {
     payload_buff = payload_buff + String((char)payload[i]);
   }
-  Serial.println(payload_buff);  
+  Serial.println(payload_buff);
+  DeserializationError err = deserializeJson(doc, payload_buff);
+  if(err)
+  {
+    Serial.print("ERROR: ");
+    Serial.println(err.c_str());
+    return;
+  }
+  const char *name = doc["n"];
+  bool a = doc["a"];
+  String sensor_id = String(name);
+  if(sensor_id.equals(CLIENT_ID))
+  {
+    actuator = a;
+  }
 }
 
 long lastReconnectAttempt = 0;
@@ -58,6 +74,7 @@ boolean reconnect()
 
 void setup()
 {
+  pinMode(LED, OUTPUT);
   Serial.begin(BAUD_RATE);
   WiFi.begin(SSID, PASSWORD);
   while (WiFi.status() != WL_CONNECTED)
@@ -87,7 +104,6 @@ void loop()
   }
   else
   {
-
     client.loop();
     String t = String(random(TEMP_MIN, TEMP_MAX));
     String h = String(random(HUM_MIN, HUM_MAX));
@@ -95,10 +111,12 @@ void loop()
     if (actuator)
     {
       a = "true";
+      digitalWrite(LED, HIGH);
     }
     else
     {
       a = "false";
+      digitalWrite(LED, LOW);
     }
     String temporal = "{\"n\":\"esp32\",\"t\":";
     temporal = String(temporal + String(t) + ",\"h\":" + String(h) + ",\"a\":" + a) + "}";
