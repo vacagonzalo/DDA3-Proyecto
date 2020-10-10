@@ -27,7 +27,9 @@ services:
         hostname: human-api
         restart: always
         expose:
+            - '1883'
             - '5432'
+            - '9001'
             - '9999'
         ports:
             - '9999:9999'

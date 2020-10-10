@@ -14,6 +14,9 @@ app.use('/devices', devices);
 const readings = require('./routes/readings.js');
 app.use('/readings', readings);
 
+const orders = require('./routes/orders.js');
+app.use('/orders', orders);
+
 app.listen(PORT, () => {
     console.log(`human-api on port ${PORT}`);
 });
