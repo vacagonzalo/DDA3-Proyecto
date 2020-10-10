@@ -1,5 +1,5 @@
-// docker run rm -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto
-// mqtt pub -t 'orders' -h 'localhost' -m '{"n":"esp32","a":true}'
+// docker run -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto
+// mqtt pub -t 'orders/esp32' -h 'localhost' -m '{"n":"esp32","a":true}'
 #include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h> // PubSubClient by Nick O'Leary
@@ -28,7 +28,7 @@ const char *MQTT_SERVER = "192.168.0.9";
 const int MQTT_PORT = 1883;
 const char *CLIENT_ID = "esp32";
 const char *TOPIC = "readings";
-const char *S_TOPIC = "orders";
+const char *S_TOPIC = "orders/esp32";
 
 bool actuator = true;
 
