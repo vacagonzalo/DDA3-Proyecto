@@ -1,8 +1,28 @@
+<h1>Test human-api</h1>
+<h2>Lista de dispositivos</h2>
 <ul>
-    <li *ngFor="let device of devices">{{device.name}}</li>
+    <li *ngFor="let device of devices">{{device.id}} - {{device.name}}</li>
 </ul>
+<h2>test de endpoints devices</h2>
 <button (click)="postTest()">postTest</button>
 <br>
 <button (click)="putTest()">putTest</button>
 <br>
 <button (click)="deleteTest()">deleteTest</button>
+<h2>test de endpoint readings</h2>
+<ul>
+    <li *ngFor="let r of readings">
+        {{r.id}} - {{r.deviceId}} - {{r.temperature}} - {{r.humidity}} -
+         {{r.actuator}} - {{r.createdAt}}
+    </li>
+</ul>
+
+<br>
+
+<ul>
+    <li *ngFor="let r of last">
+        {{r.id}} - {{r.deviceId}} - {{r.temperature}} - {{r.humidity}} -
+         {{r.actuator}} - {{r.createdAt}}
+    </li>
+</ul>
+<br>

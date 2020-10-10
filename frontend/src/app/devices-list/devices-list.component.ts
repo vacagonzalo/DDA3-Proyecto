@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from '../models/device';
+import { Reading } from '../models/reading';
 import { DevicesService } from '../services/devices.service';
+import { ReadingsService } from '../services/readings.service';
 
 @Component({
   selector: 'app-devices-list',
@@ -10,7 +12,9 @@ import { DevicesService } from '../services/devices.service';
 export class DevicesListComponent implements OnInit {
 
   public devices: Array<Device>;
-  constructor(private endpoint: DevicesService) {
+  public readings: Array<Reading>;
+  public last: Array<Reading>;
+  constructor(private endpoint: DevicesService, private apiReadings: ReadingsService) {
     this.endpoint.get()
       .then((data) => {
         this.devices = data;
@@ -18,6 +22,24 @@ export class DevicesListComponent implements OnInit {
       .catch((err) => {
         console.log(err);
         this.devices = new Array<Device>();
+      })
+
+    this.apiReadings.getSomeOf(2,10)
+      .then((data) => {
+        this.readings = data;
+      })
+      .catch((err) => {
+        console.log(err);
+        this.readings = new Array<Reading>();
+      })
+
+    this.apiReadings.getLastOf(2)
+      .then((data) => {
+        this.last = data;
+      })
+      .catch((err) => {
+        console.log(err);
+        this.last = new Array<Reading>();
       })
   }
 
@@ -53,4 +75,5 @@ export class DevicesListComponent implements OnInit {
         console.log(`postTest() error -> ${err}`);
       })
   }
+
 }
