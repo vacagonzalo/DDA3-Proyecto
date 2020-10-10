@@ -82,10 +82,10 @@ router.put('/', async (req, res) => {
   }
 });
 
-// {id: 5}
-router.delete('/', async (req, res) => {
+// null
+router.delete('/:id', async (req, res) => {
   try {
-    const device = await models.Device.findOne({ where: { id: req.body.id } });
+    const device = await models.Device.findOne({ where: { id: req.params.id } });
     if (device instanceof models.Device) {
       await device.destroy()
         .then(() => {

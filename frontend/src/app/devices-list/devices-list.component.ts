@@ -43,4 +43,14 @@ export class DevicesListComponent implements OnInit {
         console.log(`postTest() error -> ${err}`);
       })
   }
+
+  public deleteTest(): void {
+    this.endpoint.delete(6)
+      .then(res => {
+        console.log(`postTest() -> ${res}`);
+      })
+      .catch(err => {
+        console.log(`postTest() error -> ${err}`);
+      })
+  }
 }

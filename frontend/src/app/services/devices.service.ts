@@ -56,6 +56,16 @@ export class DevicesService {
       })
   }
 
-  public delete() { }
+  public delete(id: number): Promise<boolean> {
+    return this.http.delete(this.URL + id, { observe: 'response' })
+      .toPromise()
+      .then(res => {
+        return res.status == 200;
+      })
+      .catch(err => {
+        console.log(err);
+        return false;
+      })
+  }
 
 }
