@@ -25,11 +25,10 @@ export class DevicesService {
 
   public post(deviceName: string): Promise<boolean> {
     return this.http.post(
-      this.URL,
-      { name: deviceName },
-      { 
+      this.URL, { name: deviceName },
+      {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        observe: 'response' 
+        observe: 'response'
       })
       .toPromise()
       .then(res => {
@@ -41,7 +40,21 @@ export class DevicesService {
       })
   }
 
-  public put() { }
+  public put(modifiedDevice: Device): Promise<boolean> {
+    return this.http.put(this.URL, modifiedDevice,
+      {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        observe: 'response'
+      })
+      .toPromise()
+      .then(res => {
+        return res.status == 200;
+      })
+      .catch(err => {
+        console.log(err);
+        return false;
+      })
+  }
 
   public delete() { }
 

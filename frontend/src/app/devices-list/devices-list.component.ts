@@ -33,4 +33,14 @@ export class DevicesListComponent implements OnInit {
         console.log(`postTest() error -> ${err}`);
       })
   }
+
+  public putTest(): void {
+    this.endpoint.put({ id: 6, name: "putTest" })
+      .then(res => {
+        console.log(`postTest() -> ${res}`);
+      })
+      .catch(err => {
+        console.log(`postTest() error -> ${err}`);
+      })
+  }
 }
