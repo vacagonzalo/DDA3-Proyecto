@@ -9,18 +9,28 @@ import { DevicesService } from '../services/devices.service';
 })
 export class DevicesListComponent implements OnInit {
 
-  public testList: Array<Device>;
+  public devices: Array<Device>;
   constructor(private endpoint: DevicesService) {
     this.endpoint.get()
       .then((data) => {
-        this.testList = data;
+        this.devices = data;
       })
-      .catch((data) => {
-        this.testList = data;
+      .catch((err) => {
+        console.log(err);
+        this.devices = new Array<Device>();
       })
   }
 
   ngOnInit(): void {
   }
 
+  public postTest(): void {
+    this.endpoint.post("postTest")
+      .then(res => {
+        console.log(`postTest() -> ${res}`);
+      })
+      .catch(err => {
+        console.log(`postTest() error -> ${err}`);
+      })
+  }
 }

@@ -12,15 +12,34 @@ export class DevicesService {
   constructor(private http: HttpClient) { }
 
   public get(): Promise<Array<Device>> {
-    return this.http.get(this.URL).toPromise()
+    return this.http.get(
+      this.URL,
+      { headers: { 'Content-Type': 'application/json; charset=utf-8' } })
+      .toPromise()
       .then((devices: Array<Device>) => { return devices; })
-      .catch((err) => { 
+      .catch((err) => {
         console.log(err);
         return new Array<Device>();
       })
   }
 
-  public post() { }
+  public post(deviceName: string): Promise<boolean> {
+    return this.http.post(
+      this.URL,
+      { name: deviceName },
+      { 
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        observe: 'response' 
+      })
+      .toPromise()
+      .then(res => {
+        return (res.status == 201);
+      })
+      .catch(err => {
+        console.log(err);
+        return false;
+      })
+  }
 
   public put() { }
 
