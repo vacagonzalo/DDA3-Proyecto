@@ -12,7 +12,27 @@ export class DevicesListComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public turnOn(): void { }
+  public turnOn(): void {
+    let s: boolean = false;
+    this.orders.actuator({ name: "esp32", action: "on" })
+      .then(res => {
+        s = res;
+      })
+      .catch(err => {
+        s = false;
+      })
+    console.log(s);
+  }
 
-  public turnOff(): void { }
+  public turnOff(): void {
+    let s: boolean = false;
+    this.orders.actuator({ name: "esp32", action: "off" })
+      .then(res => {
+        s = res;
+      })
+      .catch(err => {
+        s = false;
+      })
+    console.log(s);
+  }
 }

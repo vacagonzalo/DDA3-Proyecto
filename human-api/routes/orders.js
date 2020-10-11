@@ -16,9 +16,15 @@ client.on('connect', () => {
   console.log(`connected to ${url}`);
 });
 
-router.put('/:deviceName/:actuatorState', (req, res) => {
-  let name = req.params.deviceName;
-  let state = req.params.actuatorState;
+router.put('/', (req, res) => {
+  let name = req.body.name;
+  let action = req.body.action;
+  let state = "";
+  if(action == "on") {
+    state = "true"
+  } else {
+    state = "false"
+  }
   let topic = `orders/${name}`;
   let data = `{"n":"${name}","a":${state}}`;
   client.publish(topic, data);
