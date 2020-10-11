@@ -10,6 +10,9 @@ import { MaterialModule } from './material/material.module';
 import { ReadingsLogComponent } from './readings-log/readings-log.component';
 import { WidgetComponent } from './widget/widget.component';
 
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component'
 
 
 @NgModule({
@@ -17,14 +20,17 @@ import { WidgetComponent } from './widget/widget.component';
     AppComponent,
     DevicesListComponent,
     ReadingsLogComponent,
-    WidgetComponent
+    WidgetComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

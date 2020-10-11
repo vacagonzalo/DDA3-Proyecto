@@ -1,4 +1,12 @@
-<div>header</div>
-<div>sidebar</div>
-<router-outlet></router-outlet>
-<div>footer</div>
+<div>
+    <app-header></app-header>
+    <mat-sidenav-container>
+        <mat-sidenav mode="side">
+            <app-devices-list></app-devices-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <app-footer></app-footer>
+</div>
