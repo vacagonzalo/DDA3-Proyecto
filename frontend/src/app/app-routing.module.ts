@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { ReadingsLogComponent } from './readings-log/readings-log.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'readings-log',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'readings-log',
     component: ReadingsLogComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
   }
 ];
 

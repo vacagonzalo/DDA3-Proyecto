@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule } from '@angular/material/table'
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatDividerModule } from '@angular/material/divider'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list'
 const MaterialComponetes = [
   MatButtonModule,
   MatTableModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDividerModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule
 ];
 
 @NgModule({

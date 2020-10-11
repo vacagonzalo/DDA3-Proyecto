@@ -1,3 +1,11 @@
-<ul class="no-bullets">
-    <li *ngFor="let d of devices">{{d.name}}</li>
-</ul>
+<mat-nav-list>
+
+    <a mat-list-item href="#" color="primary">Add new</a>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Devices</h2>
+
+    <a mat-list-item href="#" *ngFor="let d of devices">{{d.name}}</a>
+
+</mat-nav-list>

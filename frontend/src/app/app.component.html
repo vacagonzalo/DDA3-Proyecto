@@ -1,12 +1,12 @@
-<div>
-    <app-header></app-header>
-    <mat-sidenav-container>
-        <mat-sidenav mode="side">
-            <app-devices-list></app-devices-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-    <app-footer></app-footer>
-</div>
+<app-header (toggleSideBarForMe)="sideBarToggler()"></app-header>
+
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-devices-list></app-devices-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<app-footer></app-footer>
