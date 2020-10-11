@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Device } from '../models/device';
-import { Reading } from '../models/reading';
-import { DevicesService } from '../services/devices.service';
-import { ReadingsService } from '../services/readings.service';
+import { OrdersMqttService } from '../services/orders-mqtt.service';
 
 @Component({
   selector: 'app-devices-list',
@@ -11,69 +8,31 @@ import { ReadingsService } from '../services/readings.service';
 })
 export class DevicesListComponent implements OnInit {
 
-  public devices: Array<Device>;
-  public readings: Array<Reading>;
-  public last: Array<Reading>;
-  constructor(private endpoint: DevicesService, private apiReadings: ReadingsService) {
-    this.endpoint.get()
-      .then((data) => {
-        this.devices = data;
-      })
-      .catch((err) => {
-        console.log(err);
-        this.devices = new Array<Device>();
-      })
+  constructor(public orders: OrdersMqttService) { }
 
-    this.apiReadings.getSomeOf(2,10)
-      .then((data) => {
-        this.readings = data;
-      })
-      .catch((err) => {
-        console.log(err);
-        this.readings = new Array<Reading>();
-      })
+  ngOnInit(): void { }
 
-    this.apiReadings.getLastOf(2)
-      .then((data) => {
-        this.last = data;
-      })
-      .catch((err) => {
-        console.log(err);
-        this.last = new Array<Reading>();
-      })
-  }
-
-  ngOnInit(): void {
-  }
-
-  public postTest(): void {
-    this.endpoint.post("postTest")
+  public turnOn(): void {
+    let s: boolean = false;
+    this.orders.actuator({ name: "esp32", action: "on" })
       .then(res => {
-        console.log(`postTest() -> ${res}`);
+        s = res;
       })
       .catch(err => {
-        console.log(`postTest() error -> ${err}`);
+        s = false;
       })
+    console.log(s);
   }
 
-  public putTest(): void {
-    this.endpoint.put({ id: 6, name: "putTest" })
+  public turnOff(): void {
+    let s: boolean = false;
+    this.orders.actuator({ name: "esp32", action: "off" })
       .then(res => {
-        console.log(`postTest() -> ${res}`);
+        s = res;
       })
       .catch(err => {
-        console.log(`postTest() error -> ${err}`);
+        s = false;
       })
+    console.log(s);
   }
-
-  public deleteTest(): void {
-    this.endpoint.delete(6)
-      .then(res => {
-        console.log(`postTest() -> ${res}`);
-      })
-      .catch(err => {
-        console.log(`postTest() error -> ${err}`);
-      })
-  }
-
 }

@@ -11,14 +11,12 @@ var client = mqtt.connect(url, options);
 
 client.on('connect', () => {
   console.log(`connected to ${url}`);
-  client.subscribe('orders');
+  client.subscribe('orders/#');
 });
 
 client.on('message', (topic, message) => {
   let data = JSON.parse(message);
-  if (topic == 'orders') {
-    changeActuator(data);
-  }
+  changeActuator(data);
 });
 
 var names = ['alfa', 'bravo', 'charlie', 'delta'];
