@@ -7,7 +7,7 @@ import { Device } from '../models/device';
 })
 export class DevicesService {
 
-  URL: string = "http://localhost:9999/devices/";
+  private URL: string = "http://localhost:9999/devices/";
 
   constructor(private http: HttpClient) { }
 

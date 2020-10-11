@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersMqttService } from '../services/orders-mqtt.service';
+import { Device } from '../models/device';
+import { DevicesService } from '../services/devices.service';
 
 @Component({
   selector: 'app-devices-list',
@@ -8,31 +9,18 @@ import { OrdersMqttService } from '../services/orders-mqtt.service';
 })
 export class DevicesListComponent implements OnInit {
 
-  constructor(public orders: OrdersMqttService) { }
+  public devices:Array<Device>;
+  constructor(public endpoint:DevicesService) {
+    this.devices = new Array<Device>();
+    this.endpoint.get()
+    .then(res => {
+      this.devices = res;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   ngOnInit(): void { }
 
-  public turnOn(): void {
-    let s: boolean = false;
-    this.orders.actuator({ name: "esp32", action: "on" })
-      .then(res => {
-        s = res;
-      })
-      .catch(err => {
-        s = false;
-      })
-    console.log(s);
-  }
-
-  public turnOff(): void {
-    let s: boolean = false;
-    this.orders.actuator({ name: "esp32", action: "off" })
-      .then(res => {
-        s = res;
-      })
-      .catch(err => {
-        s = false;
-      })
-    console.log(s);
-  }
 }

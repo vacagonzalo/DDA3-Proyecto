@@ -7,13 +7,17 @@ import { DevicesListComponent } from './devices-list/devices-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { ReadingsLogComponent } from './readings-log/readings-log.component';
+import { WidgetComponent } from './widget/widget.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DevicesListComponent
+    DevicesListComponent,
+    ReadingsLogComponent,
+    WidgetComponent
   ],
   imports: [
     BrowserModule,
