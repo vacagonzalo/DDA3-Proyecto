@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ReadingsLogComponent } from './readings-log/readings-log.component';
-import { WidgetComponent } from './widget/widget.component';
 
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { WidgetComponent } from './widget/widget.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeviceOptionsComponent } from './device-options/device-options.component'
 
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     WidgetComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    DeviceOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
