@@ -20,6 +20,6 @@ docker-compose exec human-api sh -c "npx sequelize-cli db:seed:all"
 
 cd frontend
 
-chmod +x serve.sh
+npm install
 
-./serve.sh
+ng serve -o
