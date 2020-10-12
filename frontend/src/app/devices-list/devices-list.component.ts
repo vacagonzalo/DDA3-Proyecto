@@ -25,8 +25,8 @@ export class DevicesListComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onSelect(id) {
-    this.router.navigate(['/dashboard',id]);
+  onSelect(id, name) {
+    this.router.navigate(['/dashboard',id,name]);
   }
 
 }

@@ -6,7 +6,7 @@
 
     <h2 matSubheader>Devices</h2>
     <div *ngFor="let d of devices">
-        <a mat-list-item (click)="onSelect(d.id)">{{d.name}}</a>
+        <a mat-list-item (click)="onSelect(d.id, d.name)">{{d.name | uppercase}}</a>
     </div>
 
 </mat-nav-list>

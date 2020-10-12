@@ -9,6 +9,8 @@ export class DevicesService {
 
   private URL: string = "http://localhost:9999/devices/";
 
+  public list:Array<Device> = new Array<Device>();
+
   constructor(private http: HttpClient) { }
 
   public get(): Promise<Array<Device>> {
@@ -16,7 +18,10 @@ export class DevicesService {
       this.URL,
       { headers: { 'Content-Type': 'application/json; charset=utf-8' } })
       .toPromise()
-      .then((devices: Array<Device>) => { return devices; })
+      .then((devices: Array<Device>) => { 
+        this.list = devices;
+        return devices; 
+      })
       .catch((err) => {
         console.log(err);
         return new Array<Device>();
