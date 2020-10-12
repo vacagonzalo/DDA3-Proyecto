@@ -5,7 +5,8 @@
     <mat-divider></mat-divider>
 
     <h2 matSubheader>Devices</h2>
-
-    <a mat-list-item href="#" *ngFor="let d of devices">{{d.name}}</a>
+    <div *ngFor="let d of devices">
+        <a mat-list-item (click)="onSelect(d.id)">{{d.name}}</a>
+    </div>
 
 </mat-nav-list>

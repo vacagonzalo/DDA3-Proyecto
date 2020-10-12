@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from '../models/device';
 import { DevicesService } from '../services/devices.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-devices-list',
@@ -9,18 +10,23 @@ import { DevicesService } from '../services/devices.service';
 })
 export class DevicesListComponent implements OnInit {
 
-  public devices:Array<Device>;
-  constructor(public endpoint:DevicesService) {
+  public devices: Array<Device>;
+  constructor(public endpoint: DevicesService,
+    private router: Router) {
     this.devices = new Array<Device>();
     this.endpoint.get()
-    .then(res => {
-      this.devices = res;
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(res => {
+        this.devices = res;
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   ngOnInit(): void { }
+
+  onSelect(id) {
+    this.router.navigate(['/dashboard',id]);
+  }
 
 }
