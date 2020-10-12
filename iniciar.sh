@@ -17,3 +17,9 @@ sleep 5
 docker-compose exec human-api sh -c "npx sequelize-cli db:migrate"
 
 docker-compose exec human-api sh -c "npx sequelize-cli db:seed:all"
+
+cd frontend
+
+chmod +x serve.sh
+
+./serve.sh
