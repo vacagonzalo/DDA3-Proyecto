@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="container">
+    <form #deviceForm="ngForm" class="myform">
+        <mat-form-field appearance="fill">
+            <mat-label>New device name</mat-label>
+            <input name="newName" matInput [(ngModel)]="name">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="create()">Create!</button>
+    </form>
+</div>
