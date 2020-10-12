@@ -1,4 +1,12 @@
-<h1>MQTT test</h1>
-<button (click)="turnOn()">esp32 on</button>
-<br>
-<button (click)="turnOff()">esp32 off</button>
+<mat-nav-list>
+
+    <a mat-list-item href="#" color="primary">Add new</a>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Devices</h2>
+    <div *ngFor="let d of devices">
+        <a mat-list-item (click)="onSelect(d.id, d.name)">{{d.name | uppercase}}</a>
+    </div>
+
+</mat-nav-list>

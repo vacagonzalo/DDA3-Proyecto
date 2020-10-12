@@ -1,0 +1,10 @@
+<div class="container">
+    <form #deviceForm="ngForm" class="myform">
+        <h1>{{deviceName | uppercase}}</h1>
+        <mat-form-field appearance="fill">
+            <mat-label>New device name</mat-label>
+            <input name="newName" matInput [(ngModel)]="name">
+        </mat-form-field>
+        <button mat-raised-button color="warn" (click)="edit()">EDIT DEVICE</button>
+    </form>
+</div>

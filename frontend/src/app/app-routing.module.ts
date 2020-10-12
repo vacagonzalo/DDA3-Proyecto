@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DevicesListComponent } from './devices-list/devices-list.component';
 
+import { HomeComponent } from './home/home.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'device-list',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'device-list',
-    component: DevicesListComponent
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'dashboard/:id/:name',
+    component: DashboardComponent,
+  },
+  {
+    path: 'edit/:id/:name',
+    component: EditFormComponent
   }
 ];
 

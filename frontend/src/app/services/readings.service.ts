@@ -14,6 +14,7 @@ export class ReadingsService {
   private lastOf: string = `${this.URL}last-of/`;
   private someOf: string = `${this.URL}some-of/`;
 
+
   constructor(private http: HttpClient) { }
 
   public getAll(criteria: Criteria): Promise<Array<Reading>> {
