@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public edit() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/edit',this.deviceId,this.deviceName]);
   }
   public delet() {
     this.deviceServ.delete(this.deviceId)

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'dashboard/:id/:name',
     component: DashboardComponent,
+  },
+  {
+    path: 'edit/:id/:name',
+    component: EditFormComponent
   }
 ];
 

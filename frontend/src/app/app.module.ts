@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { HighchartsChartModule } from 'highcharts-angular';
 import { HomeComponent } from './home/home.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    EditFormComponent
   ],
   imports: [
     BrowserModule,
