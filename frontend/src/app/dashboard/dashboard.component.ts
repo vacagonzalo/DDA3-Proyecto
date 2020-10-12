@@ -4,6 +4,7 @@ import { Reading } from '../models/reading';
 import { ReadingsService } from '../services/readings.service';
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrdersMqttService } from '../services/orders-mqtt.service';
+import { DevicesService } from '../services/devices.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private endpoint: ReadingsService,
     private mqtt: OrdersMqttService,
-    private router: Router
+    private router: Router,
+    private deviceServ: DevicesService
   ) { }
 
   ngOnInit(): void {
@@ -137,6 +139,13 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/home']);
   }
   public delet() {
-    this.router.navigate(['/home']);
+    this.deviceServ.delete(this.deviceId)
+    .then(value => {
+      console.log(value);
+      this.router.navigate(['/home']);
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }
