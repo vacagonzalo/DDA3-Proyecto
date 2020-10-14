@@ -33,7 +33,7 @@ function changeActuator(data) {
 }
 
 // '{"n":"alfa","t":24.2,"h":77.7,"a":true}'
-const delay = 10000;
+const delay = 1000;
 setInterval(() => {
   let index = randomInt(0, 3);
   let n = names[index];
