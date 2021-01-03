@@ -1,5 +1,6 @@
 # Proyecto final DDA3
 Ing. Gonzalo Nahuel Vaca
+Cursada aprobada en el 3er bimestre 2020. Nota: 10/10
 
 ## Descripción
 El proyecto es una maqueta de un sistema de monitoreo y control de dispositivos IoT. Solo tiene fines educativos, dentro del contexto de la carrera de Especialización en Internet de las Cosas del laboratorio de sistemas embebidos de la Universidad de Buenos Aires.
